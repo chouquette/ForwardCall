@@ -30,9 +30,6 @@ public final class EditActivity extends Activity
 		CheckBox	checkBox = (CheckBox)findViewById( R.id.activated );
 		TextView	phoneNumberInput = (TextView)findViewById( R.id.phone_number );
 		
-		checkBox.setOnCheckedChangeListener( new OnActivatedChecked( phoneNumberInput) );
-		phoneNumberInput.setEnabled( checkBox.isChecked() );
-		
 		final String breadcrumbString = getIntent().getStringExtra( com.twofortyfouram.Intent.EXTRA_STRING_BREADCRUMB );
 		if ( breadcrumbString != null )
 			setTitle( String.format( "%s%s%s", breadcrumbString, com.twofortyfouram.Intent.BREADCRUMB_SEPARATOR, getString(R.string.app_name) ) );
@@ -47,10 +44,13 @@ public final class EditActivity extends Activity
 				final String text = getIntent().getStringExtra( Constants.INTENT_PHONE_NUMBER );
 				if ( text != null )
 				{
-					((EditText)findViewById(R.id.phone_number)).setText(text);
+					phoneNumberInput.setText(text);
 				}
+				checkBox.setChecked( getIntent().getBooleanExtra( Constants.INTENT_FORWARD_ACTIVATED, false ) );
 			}
 		}
+		checkBox.setOnCheckedChangeListener( new OnActivatedChecked( phoneNumberInput) );
+		phoneNumberInput.setEnabled( checkBox.isChecked() );
 	}
 	
 	@Override
