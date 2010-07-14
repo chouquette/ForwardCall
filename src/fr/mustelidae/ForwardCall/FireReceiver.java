@@ -13,7 +13,13 @@ public final class FireReceiver extends BroadcastReceiver {
 	{
 		if ( com.twofortyfouram.Intent.ACTION_FIRE_SETTING.equals( intent.getAction() ) )
 		{
-			Toast.makeText( context, "Hurray it worked !", Toast.LENGTH_LONG ).show();
+//			Toast.makeText( context, "Something happened !", Toast.LENGTH_LONG ).show();
+			final boolean activated = intent.getBooleanExtra(Constants.INTENT_FORWARD_ACTIVATED, false);
+
+			if ( activated )
+				Toast.makeText( context, "Forwarding activated", Toast.LENGTH_LONG ).show();
+			else
+				Toast.makeText( context, "Forwarding deactivated", Toast.LENGTH_LONG ).show();
 		}
 	}
 

@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -37,7 +39,12 @@ public final class EditActivity extends Activity
 			final Bundle forwaredBundle = getIntent().getBundleExtra(com.twofortyfouram.Intent.EXTRA_BUNDLE);
 			if ( forwaredBundle != null )
 			{
-				final String text = getIntent().getStringExtra( Constants.INTENT_EXTRA_MESSAGE );
+				final String text;
+				
+				if ( getIntent().getBooleanExtra( Constants.INTENT_FORWARD_ACTIVATED, false ) )
+					text = "Off";
+				else
+					text = getIntent().getStringExtra( Constants.INTENT_PHONE_NUMBER );
 				if ( text != null )
 				{
 					((EditText)findViewById(R.id.phone_number)).setText(text);
@@ -53,8 +60,9 @@ public final class EditActivity extends Activity
 			setResult(RESULT_CANCELED);
 		else
 		{
+			final boolean	activated = ((CheckBox) findViewById(R.id.activated)).isChecked();
 			final String	phoneNumber = ((EditText) findViewById(R.id.phone_number)).getText().toString();
-			if ( phoneNumber.length() == 0 )
+			if ( activated == true && phoneNumber.length() == 0 )
 			{
 				setResult( com.twofortyfouram.Intent.RESULT_REMOVE );
 			}
@@ -63,7 +71,9 @@ public final class EditActivity extends Activity
 				final Intent 	returnIntent = new Intent();
 				final Bundle	storeAndForwardExtras = new Bundle();
 				
-				storeAndForwardExtras.putString(Constants.INTENT_EXTRA_MESSAGE, phoneNumber );
+				storeAndForwardExtras.putString(Constants.INTENT_PHONE_NUMBER, phoneNumber );
+				storeAndForwardExtras.putBoolean(Constants.INTENT_FORWARD_ACTIVATED, activated );
+				Log.d("ForwardCall", String.format("Activated state:%b", activated) );
 				returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_BUNDLE, storeAndForwardExtras );
 				if ( phoneNumber.length() > com.twofortyfouram.Intent.MAXIMUM_BLURB_LENGTH )
 					returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_STRING_BLURB, phoneNumber.substring(0, com.twofortyfouram.Intent.MAXIMUM_BLURB_LENGTH ) );

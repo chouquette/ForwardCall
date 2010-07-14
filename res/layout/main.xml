@@ -12,6 +12,12 @@
 		android:layout_weight="1"
 		android:layout_margin="5px"
 	>
+		<CheckBox
+			android:id="@+id/activated"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top"
+			android:text="@string/activated_hint" />
 		<EditText
 			android:id="@+id/phone_number"
 			android:layout_width="fill_parent"

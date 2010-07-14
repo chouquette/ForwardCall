@@ -2,5 +2,6 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">FowardCall</string>
-<string name="phone_numer_hint">The phone number to redirect the call to.</string>
+    <string name="phone_numer_hint">The phone number to redirect the call to.</string>
+    <string name="activated_hint">Activated:</string>
 </resources>
