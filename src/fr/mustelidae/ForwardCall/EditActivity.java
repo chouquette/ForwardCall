@@ -93,7 +93,7 @@ public final class EditActivity extends Activity
 		menu.add( 0, MENU_DONT_SAVE, 0, SharedResources.getTextResource(pm, SharedResources.STRING_MENU_DONTSAVE ) ).
 			setIcon( SharedResources.getDrawableResource(pm, SharedResources.DRAWABLE_MENU_DONTSAVE ) ).getItemId();
 		menu.add( 0, MENU_SAVE, 0, SharedResources.getTextResource( pm, SharedResources.STRING_MENU_SAVE ) ).
-			setIcon( SharedResources.getDrawableResource( pm, SharedResources.STRING_MENU_SAVE ) );
+			setIcon( SharedResources.getDrawableResource( pm, SharedResources.DRAWABLE_MENU_SAVE ) ).getItemId();
 		
 		return true;
 	}
