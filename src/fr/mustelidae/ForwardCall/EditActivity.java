@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public final class EditActivity extends Activity 
 {
@@ -26,6 +27,11 @@ public final class EditActivity extends Activity
 		super.onCreate( savedInstanceState );
 		
 		setContentView( R.layout.main );
+		CheckBox	checkBox = (CheckBox)findViewById( R.id.activated );
+		TextView	phoneNumberInput = (TextView)findViewById( R.id.phone_number );
+		
+		checkBox.setOnCheckedChangeListener( new OnActivatedChecked( phoneNumberInput) );
+		phoneNumberInput.setEnabled( checkBox.isChecked() );
 		
 		final String breadcrumbString = getIntent().getStringExtra( com.twofortyfouram.Intent.EXTRA_STRING_BREADCRUMB );
 		if ( breadcrumbString != null )
