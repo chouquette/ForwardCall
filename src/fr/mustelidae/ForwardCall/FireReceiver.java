@@ -6,8 +6,6 @@ import android.content.Intent;
 
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
-import android.app.Activity;
 
 public final class FireReceiver extends BroadcastReceiver {
 
@@ -20,17 +18,20 @@ public final class FireReceiver extends BroadcastReceiver {
 			final boolean activated = intent.getBooleanExtra(Constants.INTENT_FORWARD_ACTIVATED, false);
 
 			if ( activated )
-				Toast.makeText( context, "Forwarding activated", Toast.LENGTH_LONG ).show();
+			{
+				final String	phoneNumber = intent.getStringExtra( Constants.INTENT_PHONE_NUMBER );
+				enableCallForwarding(context, phoneNumber);
+			}
 			else
 			{
-				Toast.makeText( context, "Forwarding deactivated", Toast.LENGTH_LONG ).show();
 				disableCallForwarding( context );
 			}
 		}
 	}
-	private void	disableCallForwarding( Context context )
+	
+	private void	enableCallForwarding( Context context, final String phoneNumber )
 	{
-		final String	toDial = "tel:##21#";
+		final String	toDial = "tel:**21*" + phoneNumber + Uri.encode("#");
 
 		try
 		{
@@ -42,7 +43,23 @@ public final class FireReceiver extends BroadcastReceiver {
 		{
 			Log.e("ForwardCall", e.getMessage());
 		}
-		
+	}
+	
+	private void	disableCallForwarding( Context context )
+	{
+		final String	sharpEncoded = Uri.encode("#");
+		final String	toDial = String.format("tel:%s%s21%s", sharpEncoded, sharpEncoded, sharpEncoded );
+
+		try
+		{
+			Intent	intent = new Intent( Intent.ACTION_CALL, Uri.parse( toDial ) );
+			intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+			context.startActivity( intent );
+		}
+		catch (Exception e)
+		{
+			Log.e("ForwardCall", e.getMessage());
+		}		
 	}
 
 }
