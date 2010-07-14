@@ -4,9 +4,19 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+	<LinearLayout
+		android:id="@+id/frame"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_margin="5px"
+	>
+		<EditText
+			android:id="@+id/phone_number"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="top"
+			android:hint="@string/phone_numer_hint" />
+	</LinearLayout>
 </LinearLayout>
