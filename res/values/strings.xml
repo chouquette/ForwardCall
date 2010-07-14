@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World!</string>
     <string name="app_name">FowardCall</string>
-    <string name="phone_numer_hint">The phone number to redirect the call to.</string>
-    <string name="activated_hint">Activated:</string>
+    <string name="phone_numer_hint">Phone number.</string>
+    <string name="activated_hint">Activate</string>
 </resources>

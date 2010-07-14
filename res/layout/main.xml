@@ -17,12 +17,13 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
-			android:text="@string/activated_hint" />
+			android:hint="@string/activated_hint" />
 		<EditText
 			android:id="@+id/phone_number"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
+			android:phoneNumber="true"
 			android:hint="@string/phone_numer_hint" />
 	</LinearLayout>
 </LinearLayout>
