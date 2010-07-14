@@ -39,12 +39,7 @@ public final class EditActivity extends Activity
 			final Bundle forwaredBundle = getIntent().getBundleExtra(com.twofortyfouram.Intent.EXTRA_BUNDLE);
 			if ( forwaredBundle != null )
 			{
-				final String text;
-				
-				if ( getIntent().getBooleanExtra( Constants.INTENT_FORWARD_ACTIVATED, false ) )
-					text = "Off";
-				else
-					text = getIntent().getStringExtra( Constants.INTENT_PHONE_NUMBER );
+				final String text = getIntent().getStringExtra( Constants.INTENT_PHONE_NUMBER );
 				if ( text != null )
 				{
 					((EditText)findViewById(R.id.phone_number)).setText(text);
@@ -62,6 +57,12 @@ public final class EditActivity extends Activity
 		{
 			final boolean	activated = ((CheckBox) findViewById(R.id.activated)).isChecked();
 			final String	phoneNumber = ((EditText) findViewById(R.id.phone_number)).getText().toString();
+			final String	blurb;
+			
+			if ( activated == true )
+				blurb = phoneNumber;
+			else
+				blurb = "OFF";
 			if ( activated == true && phoneNumber.length() == 0 )
 			{
 				setResult( com.twofortyfouram.Intent.RESULT_REMOVE );
@@ -73,12 +74,12 @@ public final class EditActivity extends Activity
 				
 				storeAndForwardExtras.putString(Constants.INTENT_PHONE_NUMBER, phoneNumber );
 				storeAndForwardExtras.putBoolean(Constants.INTENT_FORWARD_ACTIVATED, activated );
-				Log.d("ForwardCall", String.format("Activated state:%b", activated) );
+
 				returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_BUNDLE, storeAndForwardExtras );
 				if ( phoneNumber.length() > com.twofortyfouram.Intent.MAXIMUM_BLURB_LENGTH )
-					returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_STRING_BLURB, phoneNumber.substring(0, com.twofortyfouram.Intent.MAXIMUM_BLURB_LENGTH ) );
+					returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_STRING_BLURB, blurb.substring(0, com.twofortyfouram.Intent.MAXIMUM_BLURB_LENGTH ) );
 				else
-					returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_STRING_BLURB, phoneNumber );
+					returnIntent.putExtra( com.twofortyfouram.Intent.EXTRA_STRING_BLURB, blurb );
 				setResult( RESULT_OK, returnIntent );
 			}
 		}
