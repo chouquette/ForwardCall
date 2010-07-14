@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FowardCall</string>
+    <string name="app_name"><i>Locale</i> FowardCall</string>
+    <string name="plugin_name">FowardCall</string>
     <string name="phone_numer_hint">Phone number.</string>
     <string name="activated_hint">Activate</string>
 </resources>

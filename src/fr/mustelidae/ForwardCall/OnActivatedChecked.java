@@ -1,6 +1,5 @@
 package fr.mustelidae.ForwardCall;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
